@@ -180,6 +180,20 @@
     min-width: 0;
   }
 
+  .fullpage-scroll {
+    scrollbar-width: none;
+  }
+
+  .fullpage-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-height: 760px) and (min-width: 1024px) {
+    .fullpage-scroll section {
+      align-items: flex-start;
+    }
+  }
+
   @media (min-width: 640px) {
     .container {
       padding-left: 1.5rem; /* 24px - tablet padding */
@@ -356,4 +370,38 @@ button:active {
 /* 服务项悬停效果 */
 .service-item-hover {
   @apply transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 hover:border-accent/50;
+}
+
+@keyframes page-card-enter-left {
+  from {
+    opacity: 0.35;
+    transform: translateX(-56px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes page-card-enter-right {
+  from {
+    opacity: 0.35;
+    transform: translateX(56px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.page-card-enter-left {
+  animation: page-card-enter-left 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-card-enter-right {
+  animation: page-card-enter-right 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-card-reset-delay {
+  animation-delay: 0ms;
 }
