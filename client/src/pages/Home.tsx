@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
   BarChart3,
-  ChevronDown,
   Cloud,
   Database,
   Download,
@@ -12,6 +11,7 @@ import {
   Network,
   Server,
   User,
+  Users,
   Zap,
 } from "lucide-react";
 
@@ -89,6 +89,29 @@ export default function Home() {
     },
   ];
 
+  const heroStats = [
+    {
+      value: "1000+",
+      label: "全球数据集",
+      icon: Globe,
+    },
+    {
+      value: "50+",
+      label: "API 接口",
+      icon: Zap,
+    },
+    {
+      value: "80+",
+      label: "合作机构",
+      icon: Network,
+    },
+    {
+      value: "200+",
+      label: "专家入驻",
+      icon: Users,
+    },
+  ];
+
   const scrollToPage = useCallback((pageIndex: number) => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
@@ -132,7 +155,7 @@ export default function Home() {
   return (
     <div className="h-screen overflow-hidden bg-background text-foreground">
       {/* 固定导航栏 */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#003b91] text-white shadow-lg shadow-black/15">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo部分 */}
           <div className="flex items-center gap-3">
@@ -141,29 +164,29 @@ export default function Home() {
               alt="观海数据大脑"
               className="w-10 h-10"
             />
-            <span className="font-bold text-lg hidden sm:inline">观海数据大脑</span>
+            <span className="font-bold text-xl hidden sm:inline">观海数据大脑</span>
           </div>
 
           {/* 中间导航项 - 增大字体和间距 */}
-          <div className="hidden lg:flex items-center gap-10">
-            <a href="/" className="text-base font-medium hover:text-accent transition-colors">首页</a>
-            <a href="/service/api-hub" className="text-base font-medium hover:text-accent transition-colors">API Hub</a>
-            <a href="/pool/public-data" className="text-base font-medium hover:text-accent transition-colors">全球公共数据源</a>
-            <a href="/service/datasets" className="text-base font-medium hover:text-accent transition-colors">高质量数据集</a>
-            <a href="/pool/channel" className="text-base font-medium hover:text-accent transition-colors">海洋可信数据空间</a>
+          <div className="hidden lg:flex h-full items-center">
+            <a href="/" className="flex h-full items-center bg-[#1f7eea] px-6 text-lg font-semibold text-white transition-colors hover:bg-[#2b88f0]">首页</a>
+            <a href="/service/api-hub" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">API Hub</a>
+            <a href="/pool/public-data" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">全球公共数据源</a>
+            <a href="/service/datasets" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">高质量数据集</a>
+            <a href="/pool/channel" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">海洋可信数据空间</a>
           </div>
 
           {/* 右侧按钮 */}
           <div className="flex items-center gap-3">
-            <Button size="sm" variant="ghost" className="hidden md:flex gap-2">
+            <Button size="sm" variant="ghost" className="hidden md:flex gap-2 text-white hover:bg-white/10 hover:text-white">
               <User className="w-4 h-4" />
               <span>个人中心</span>
             </Button>
-            <Button size="sm" variant="outline" className="hidden md:flex">
+            <Button size="sm" variant="outline" className="hidden md:flex border-white/50 bg-transparent text-white hover:bg-white/10 hover:text-white">
               <LogIn className="w-4 h-4 mr-2" />
               登陆
             </Button>
-            <Button size="sm" className="bg-primary hover:bg-primary/90">
+            <Button size="sm" className="bg-[#1f7eea] text-white hover:bg-[#2b88f0]">
               注册
             </Button>
           </div>
@@ -189,7 +212,7 @@ export default function Home() {
 
           {/* 内容 */}
           <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-12 animate-fade-in-up">
+            <div className="text-center mb-8 animate-fade-in-up">
               <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-accent via-primary to-accent bg-clip-text text-transparent">
                 观海数据大脑
               </h1>
@@ -201,7 +224,7 @@ export default function Home() {
             </div>
 
             {/* 核心价值展示 - 拉长卡片 */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {/* 海洋可信数据底座 - 左侧拉长 */}
               <div className={`p-8 rounded-xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border-2 border-blue-500/30 backdrop-blur-sm card-lift animate-fade-in-left animation-delay-100 lg:col-span-1 ${activePage === 0 ? "page-card-enter-left page-card-reset-delay" : ""}`}>
                 <div className="flex items-start gap-4 mb-4">
@@ -217,8 +240,12 @@ export default function Home() {
 
               {/* 中央占位符 */}
               <div className="hidden lg:flex items-center justify-center">
-                <div className="text-center text-muted-foreground text-sm">
-                  {/* <p>连接</p> */}
+                <div className="relative flex w-full items-center justify-center text-center text-muted-foreground text-sm">
+                  <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-blue-500/20 via-accent/60 to-green-500/20"></div>
+                  <div className="relative z-10 flex h-20 w-20 flex-col items-center justify-center rounded-full border border-accent/40 bg-card/70 backdrop-blur-sm shadow-lg shadow-accent/10">
+                    <Network className="h-7 w-7 text-accent" />
+                    <span className="mt-1 text-xs font-semibold text-accent">融合</span>
+                  </div>
                 </div>
               </div>
 
@@ -236,14 +263,20 @@ export default function Home() {
               </div>
             </div>
 
-            <button
-              type="button"
-              onClick={() => scrollToPage(1)}
-              className="mx-auto mt-12 flex h-11 w-11 items-center justify-center rounded-full border border-accent/40 bg-card/50 text-accent backdrop-blur-sm hover:border-accent hover:bg-card"
-              aria-label="滚动到下层"
-            >
-              <ChevronDown className="h-5 w-5" />
-            </button>
+            <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+              {heroStats.map((stat, index) => (
+                <div
+                  key={stat.label}
+                  className={`rounded-lg border border-blue-500/20 bg-card/55 px-4 py-3 text-center backdrop-blur-sm card-lift animate-fade-in-up animation-delay-${(index + 3) * 100}`}
+                >
+                  <div className="mx-auto mb-2 flex h-11 w-11 -rotate-12 items-center justify-center rounded-xl bg-blue-600/70 shadow-lg shadow-blue-900/30">
+                    <stat.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-3xl font-bold leading-none text-blue-500">{stat.value}</div>
+                  <div className="mt-2 text-sm font-semibold text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
