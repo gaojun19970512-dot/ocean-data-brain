@@ -248,22 +248,22 @@ export default function Home() {
         </section>
 
         {/* 下层：左中右三列服务区域 */}
-        <section className="relative flex min-h-screen snap-start snap-always items-center overflow-hidden pt-24 pb-8">
+        <section className="relative flex h-screen snap-start snap-always items-center overflow-hidden pt-20 pb-4">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background"></div>
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 xl:gap-8">
+          <div className="container mx-auto px-4 relative z-10 flex h-full min-h-0 flex-col justify-between gap-4">
+            <div className="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-3 gap-5 xl:gap-6">
               {/* 左列：海洋数据服务平台 */}
-              <div className={`flex flex-col p-6 xl:p-8 rounded-xl bg-gradient-to-br ${serviceModules[0].color} border-2 ${serviceModules[0].borderColor} backdrop-blur-sm card-lift animate-fade-in-left animation-delay-300 ${activePage === 1 ? "page-card-enter-left page-card-reset-delay" : ""}`}>
-                <div className="mb-6">
+              <div className={`flex min-h-0 flex-col p-5 xl:p-6 rounded-xl bg-gradient-to-br ${serviceModules[0].color} border-2 ${serviceModules[0].borderColor} backdrop-blur-sm card-lift animate-fade-in-left animation-delay-300 ${activePage === 1 ? "page-card-enter-left page-card-reset-delay" : ""}`}>
+                <div className="mb-4">
                   <h2 className="text-2xl font-bold mb-2">{serviceModules[0].title}</h2>
                   <p className="text-sm text-muted-foreground">{serviceModules[0].subtitle}</p>
                 </div>
 
-                <div className="space-y-4 flex-1">
+                <div className="space-y-3 flex-1">
                   {serviceModules[0].services.map((service, index) => (
                     <a key={service.id} href={service.link} className="group block">
-                      <div className={`p-4 rounded-lg bg-card/60 border border-border hover:border-accent hover:bg-card transition-all duration-300 cursor-pointer service-item-hover animate-fade-in-up animation-delay-${(index + 4) * 100}`}>
+                      <div className={`p-3 xl:p-4 rounded-lg bg-card/60 border border-border hover:border-accent hover:bg-card transition-all duration-300 cursor-pointer service-item-hover animate-fade-in-up animation-delay-${(index + 4) * 100}`}>
                         <div className="flex items-start gap-3">
                           <service.icon className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                           <div className="flex-1 min-w-0">
@@ -277,7 +277,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-border/50">
+                <div className="mt-4 pt-4 border-t border-border/50">
                   <Button className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/50" size="sm">
                     探索服务
                   </Button>
@@ -287,9 +287,9 @@ export default function Home() {
               {/* 中列：核心架构展示 */}
               <div className="flex flex-col items-center justify-center animate-fade-in-up animation-delay-400">
                 {/* 大脑图标 */}
-                <div className="w-44 h-44 xl:w-48 xl:h-48 rounded-full bg-gradient-to-br from-primary/40 to-accent/40 border-2 border-accent/60 flex items-center justify-center backdrop-blur-sm hover:border-accent hover:shadow-xl hover:shadow-accent/30 transition-all duration-300 mb-8 animate-float">
+                <div className="w-36 h-36 xl:w-44 xl:h-44 rounded-full bg-gradient-to-br from-primary/40 to-accent/40 border-2 border-accent/60 flex items-center justify-center backdrop-blur-sm hover:border-accent hover:shadow-xl hover:shadow-accent/30 transition-all duration-300 mb-5 animate-float">
                   <div className="text-center">
-                    <div className="text-6xl mb-3">🧠</div>
+                    <div className="text-5xl xl:text-6xl mb-2">🧠</div>
                     <p className="text-sm font-bold text-accent">数据大脑</p>
                   </div>
                 </div>
@@ -309,16 +309,16 @@ export default function Home() {
               </div>
 
               {/* 右列：海洋数据资源池 */}
-              <div className={`flex flex-col p-6 xl:p-8 rounded-xl bg-gradient-to-br ${serviceModules[1].color} border-2 ${serviceModules[1].borderColor} backdrop-blur-sm card-lift animate-fade-in-right animation-delay-500 ${activePage === 1 ? "page-card-enter-right page-card-reset-delay" : ""}`}>
-                <div className="mb-6">
+              <div className={`flex min-h-0 flex-col p-5 xl:p-6 rounded-xl bg-gradient-to-br ${serviceModules[1].color} border-2 ${serviceModules[1].borderColor} backdrop-blur-sm card-lift animate-fade-in-right animation-delay-500 ${activePage === 1 ? "page-card-enter-right page-card-reset-delay" : ""}`}>
+                <div className="mb-4">
                   <h2 className="text-2xl font-bold mb-2">{serviceModules[1].title}</h2>
                   <p className="text-sm text-muted-foreground">{serviceModules[1].subtitle}</p>
                 </div>
 
-                <div className="space-y-4 flex-1">
+                <div className="space-y-3 flex-1">
                   {serviceModules[1].services.map((service, index) => (
                     <a key={service.id} href={service.link} className="group block">
-                      <div className={`p-4 rounded-lg bg-card/60 border border-border hover:border-accent hover:bg-card transition-all duration-300 cursor-pointer service-item-hover animate-fade-in-up animation-delay-${(index + 7) * 100}`}>
+                      <div className={`p-3 xl:p-4 rounded-lg bg-card/60 border border-border hover:border-accent hover:bg-card transition-all duration-300 cursor-pointer service-item-hover animate-fade-in-up animation-delay-${(index + 7) * 100}`}>
                         <div className="flex items-start gap-3">
                           <service.icon className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                           <div className="flex-1 min-w-0">
@@ -332,7 +332,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-border/50">
+                <div className="mt-4 pt-4 border-t border-border/50">
                   <Button className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/50" size="sm">
                     浏览资源
                   </Button>
@@ -341,32 +341,32 @@ export default function Home() {
             </div>
 
             {/* 支撑层信息 */}
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-border/50 pt-5">
+            <div className="grid shrink-0 grid-cols-1 md:grid-cols-2 gap-3 border-t border-border/50 pt-3">
               {/* 国家海洋可信数据空间 */}
-              <div className="p-4 rounded-lg bg-card/70 border border-border hover:border-accent/50 transition-colors card-lift animate-fade-in-left animation-delay-600">
+              <div className="p-3 rounded-lg bg-card/70 border border-border hover:border-accent/50 transition-colors card-lift animate-fade-in-left animation-delay-600">
                 <div className="flex items-center gap-3 mb-2">
                   <Cloud className="w-5 h-5 text-accent flex-shrink-0" />
                   <h3 className="text-base font-semibold">国家海洋可信数据空间</h3>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-[11px] text-muted-foreground leading-relaxed">
                   跨域数据互认与互联 · 数据分级分类管理 · 数据权属记录与溯权 · 安全与隐私保护框架 · 用途控制与合规监管 · 可信交换与互操作机制
                 </p>
               </div>
 
               {/* 中国移动基础设施能力 */}
-              <div className="p-4 rounded-lg bg-card/70 border border-border hover:border-accent/50 transition-colors card-lift animate-fade-in-right animation-delay-600">
+              <div className="p-3 rounded-lg bg-card/70 border border-border hover:border-accent/50 transition-colors card-lift animate-fade-in-right animation-delay-600">
                 <div className="flex items-center gap-3 mb-2">
                   <Server className="w-5 h-5 text-accent flex-shrink-0" />
                   <h3 className="text-base font-semibold">中国移动基础设施能力</h3>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-[11px] text-muted-foreground leading-relaxed">
                   信息大数据平台 · 移动云计算与存储 · 5G/5G-A海洋通信网络 · 国际海洋数据下载专网 · 安全与合规保障体系 · 算力网络智能调度
                 </p>
               </div>
             </div>
 
             {/* 页脚 */}
-            <footer className="pt-4 text-center text-xs text-muted-foreground">
+            <footer className="shrink-0 pt-1 text-center text-xs text-muted-foreground">
               <p>&copy; 2024 观海数据大脑. 保留所有权利。</p>
             </footer>
           </div>
