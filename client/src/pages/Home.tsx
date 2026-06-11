@@ -21,7 +21,7 @@ import {
  * 设计理念：清晰的视觉层级，突出核心价值
  */
 
-const HOME_PAGE_COUNT = 2;
+const HOME_PAGE_COUNT = 3;
 const HOME_ACTIVE_PAGE_STATE_KEY = "oceanDataBrainHomeActivePage";
 const HOME_ACTIVE_PAGE_STORAGE_KEY = "ocean-data-brain:home-active-page";
 
@@ -157,6 +157,62 @@ export default function Home() {
     },
   ];
 
+  const downloadBulletins = [
+    { time: "09:12", user: "青岛用户", dataset: "RS_075_气溶胶参数.csv" },
+    { time: "09:26", user: "厦门用户", dataset: "Geo_043_海底地形点位.csv" },
+    { time: "09:41", user: "上海用户", dataset: "Geo_011_近海岸线.geojson" },
+    { time: "10:03", user: "舟山用户", dataset: "Manage_071_滩涂利用统计.xlsx" },
+    { time: "10:18", user: "广州用户", dataset: "Env_029_浮游生物统计.csv" },
+    { time: "10:36", user: "宁波用户", dataset: "RS_059_海冰遥感.dat" },
+    { time: "10:52", user: "深圳用户", dataset: "Env_100_水色透明度.txt" },
+    { time: "11:07", user: "大连用户", dataset: "Geo_025_海底地形点位.csv" },
+    { time: "11:23", user: "天津用户", dataset: "Manage_041_海洋经济统计.xlsx" },
+    { time: "11:45", user: "连云港用户", dataset: "RS_036_赤潮监测产品.csv" },
+  ];
+
+  const valueAddedServices = [
+    {
+      title: "全球海洋公共数据源",
+      links: [
+        { label: "全球海洋公共数据源汇聚", href: "#/pool/public-data" },
+        { label: "多源海洋公共数据枢纽站", href: "#/pool/public-data" },
+      ],
+      image: "./global-ocean-public-data.png",
+      icon: Server,
+      accentClass: "border-blue-500/35 from-blue-500/15 to-cyan-500/10",
+    },
+    {
+      title: "中国移动基础设施能力",
+      links: [
+        { label: "中国移动梧桐大模型", href: "https://bigdata.10086.cn/" },
+        { label: "移动云", href: "https://icloud.sh.chinamobile.com/" },
+      ],
+      image: "./china-mobile-infrastructure.png",
+      icon: Cloud,
+      accentClass: "border-cyan-500/35 from-cyan-500/15 to-sky-500/10",
+    },
+    {
+      title: "全球海洋数据服务API",
+      links: [
+        { label: "全球海洋数据API枢纽", href: "#/service/api-hub" },
+        { label: "多源服务接口汇聚中心", href: "#/service/api-hub" },
+      ],
+      image: "./global-ocean-service-api.png",
+      icon: Zap,
+      accentClass: "border-sky-500/35 from-sky-500/15 to-blue-500/10",
+    },
+    {
+      title: "海洋可信数据空间",
+      links: [
+        { label: "海洋可信数据交换枢纽", href: "#/pool/channel" },
+        { label: "可信数据空间安全网关", href: "#/pool/channel" },
+      ],
+      image: "./ocean-trusted-data-space.png",
+      icon: Network,
+      accentClass: "border-emerald-500/35 from-emerald-500/15 to-teal-500/10",
+    },
+  ];
+
   const scrollToPage = useCallback((pageIndex: number) => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
@@ -214,14 +270,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="h-screen overflow-hidden bg-background text-foreground">
+    <div className="reference-ocean-bg h-screen overflow-hidden text-foreground">
       {/* 固定导航栏 */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#003b91] text-white shadow-lg shadow-black/15">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black text-white shadow-lg shadow-black/15">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo部分 */}
           <div className="flex items-center gap-3">
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663677972124/fG6Wn8CB7X6iCsAifQ7nmi/ocean-brain-logo-NfgQQLz3MTZpXYU8ZqRgGe.webp"
+              src="./ocean-brain-icon.png"
               alt="观海数据大脑"
               className="w-10 h-10"
             />
@@ -230,11 +286,11 @@ export default function Home() {
 
           {/* 中间导航项 - 增大字体和间距 */}
           <div className="hidden lg:flex h-full items-center">
-            <a href="#/" className="flex h-full items-center bg-[#1f7eea] px-6 text-lg font-semibold text-white transition-colors hover:bg-[#2b88f0]">首页</a>
-            <a href="#/service/api-hub" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">API Hub</a>
-            <a href="#/pool/public-data" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">全球公共数据源</a>
-            <a href="#/service/datasets" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">高质量数据集</a>
-            <a href="#/pool/channel" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">海洋可信数据空间</a>
+            <a href="./marine-fishery-job-datasets.html" className="flex h-full items-center px-4 text-base font-semibold text-white transition-colors hover:bg-white/10 xl:px-5">海洋渔业类岗位数据集</a>
+            <a href="./marine-transport-job-datasets.html" className="flex h-full items-center px-4 text-base font-semibold text-white transition-colors hover:bg-white/10 xl:px-5">海洋交通类岗位数据集</a>
+            <a href="./marine-public-job-datasets.html" className="flex h-full items-center px-4 text-base font-semibold text-white transition-colors hover:bg-white/10 xl:px-5">海洋公共类岗位数据集</a>
+            <a href="./coastal-tourism-job-datasets.html" className="flex h-full items-center px-4 text-base font-semibold text-white transition-colors hover:bg-white/10 xl:px-5">滨海文旅类岗位数据集</a>
+            <a href="./marine-vessel-job-datasets.html" className="flex h-full items-center px-4 text-base font-semibold text-white transition-colors hover:bg-white/10 xl:px-5">海洋船舶类岗位数据集</a>
           </div>
 
           {/* 右侧按钮 */}
@@ -260,24 +316,17 @@ export default function Home() {
         className="fullpage-scroll h-screen overflow-y-auto scroll-smooth snap-y snap-mandatory overscroll-none"
       >
         {/* 上层：核心概念区域 - 带流动背景 */}
-        <section className="relative flex min-h-screen snap-start snap-always items-center overflow-hidden border-b border-border/50 pt-24 pb-10">
+        <section className="home-hero-section relative flex min-h-screen snap-start snap-always items-center overflow-hidden border-b border-border/50 pt-24 pb-10">
           {/* 流动背景 */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663677972124/fG6Wn8CB7X6iCsAifQ7nmi/ocean-wave-animation-Au2vj9LEtHNSJp6L6XYMyn.webp"
-              alt="ocean waves"
-              className="w-full h-full object-cover opacity-30"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background"></div>
-          </div>
+          <div className="absolute inset-0 z-0 reference-ocean-bg"></div>
 
           {/* 内容 */}
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-8 animate-fade-in-up">
-              <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-accent via-primary to-accent bg-clip-text text-transparent">
+          <div className="home-hero-inner container mx-auto px-4 relative z-10">
+            <div className="home-hero-copy text-center mb-8 animate-fade-in-up">
+              <h1 className="home-hero-title text-5xl md:text-6xl font-bold mb-4 text-white">
                 观海数据大脑
               </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              <p className="home-hero-subtitle text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                 汇聚全球海洋数据，赋能智慧决策。
                 <br />
                 一站式海洋数据服务平台，连接数据、知识与应用。
@@ -285,65 +334,105 @@ export default function Home() {
             </div>
 
             {/* 核心价值展示 - 拉长卡片 */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {/* 海洋可信数据底座 - 左侧拉长 */}
-              <div className={`p-8 rounded-xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border-2 border-blue-500/30 backdrop-blur-sm card-lift animate-fade-in-left animation-delay-100 lg:col-span-1 ${activePage === 0 ? "page-card-enter-left page-card-reset-delay" : ""}`}>
-                <div className="flex items-start gap-4 mb-4">
-                  <Cloud className="w-8 h-8 text-accent flex-shrink-0 mt-1" />
+            <div className="home-feature-grid grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {/* 全球海洋科学数据汇聚共享服务中心 - 左侧拉长 */}
+              <div className={`home-feature-card p-8 rounded-xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border-2 border-blue-500/30 backdrop-blur-sm card-lift animate-fade-in-left animation-delay-100 lg:col-span-1 ${activePage === 0 ? "page-card-enter-left page-card-reset-delay" : ""}`}>
+                <div className="home-feature-row flex items-start gap-4 mb-4">
+                  <img
+                    src="./ocean-science-logo.svg"
+                    alt=""
+                    className="home-feature-icon h-16 w-16 flex-shrink-0 rounded-full bg-white object-contain p-1 shadow-lg shadow-blue-900/30"
+                  />
                   <div>
-                    <h3 className="text-xl font-bold">海洋可信数据底座</h3>
-                    <p className="text-base text-muted-foreground mt-2 leading-relaxed">
-                      建立统一的数据标准和互认机制，实现多源数据的无缝融合与可信共享，为海洋数据的流通提供坚实基础。
+                    <h3 className="home-feature-title text-xl font-bold">全球海洋科学数据汇聚共享服务中心</h3>
+                    <p className="home-feature-text text-base text-muted-foreground mt-2 leading-relaxed">
+                      全球海洋科学数据枢纽<br />
+多源高质量标准集成库<br />
+全球开放科学共享引擎
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* 中央占位符 */}
-              <div className="hidden lg:flex items-center justify-center">
-                <div className="relative flex w-full items-center justify-center text-center text-muted-foreground text-sm">
-                  <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-blue-500/20 via-accent/60 to-green-500/20"></div>
-                  <div className="relative z-10 flex h-20 w-20 flex-col items-center justify-center rounded-full border border-accent/40 bg-card/70 backdrop-blur-sm shadow-lg shadow-accent/10">
-                    <Network className="h-7 w-7 text-accent" />
-                    <span className="mt-1 text-xs font-semibold text-accent">融合</span>
+              {/* 数据大脑 */}
+              <div className="hidden lg:flex flex-col items-center justify-center animate-fade-in-up animation-delay-400">
+                <div className="home-brain w-36 h-36 xl:w-44 xl:h-44 rounded-full bg-gradient-to-br from-primary/40 to-accent/40 border-2 border-accent/60 flex items-center justify-center backdrop-blur-sm hover:border-accent hover:shadow-xl hover:shadow-accent/30 transition-all duration-300 mb-5 animate-float">
+                  <div className="text-center">
+                    <div className="home-brain-emoji text-5xl xl:text-6xl mb-2">🧠</div>
+                    <p className="home-brain-label text-sm font-bold text-accent">数据大脑</p>
                   </div>
+                </div>
+
+                <div className="text-center">
+                  <p className="home-brain-copy text-sm text-muted-foreground leading-relaxed">
+                    <span className="font-semibold text-foreground">通过智能数据大脑</span>
+                    {/* <br />
+                    连接海洋科学数据与岗位数据集
+                    <br />
+                    <span className="text-xs mt-2 block">为用户提供完整的数据解决方案</span> */}
+                  </p>
                 </div>
               </div>
 
-              {/* 新型海洋数据基础设施 - 右侧拉长 */}
-              <div className={`p-8 rounded-xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-2 border-green-500/30 backdrop-blur-sm card-lift animate-fade-in-right animation-delay-200 lg:col-span-1 ${activePage === 0 ? "page-card-enter-right page-card-reset-delay" : ""}`}>
-                <div className="flex items-start gap-4 mb-4">
-                  <Server className="w-8 h-8 text-accent flex-shrink-0 mt-1" />
+              {/* 全球海洋岗位高质量数据集中心 - 右侧拉长 */}
+              <div className={`home-feature-card p-8 rounded-xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-2 border-green-500/30 backdrop-blur-sm card-lift animate-fade-in-right animation-delay-200 lg:col-span-1 ${activePage === 0 ? "page-card-enter-right page-card-reset-delay" : ""}`}>
+                <div className="home-feature-row flex items-start gap-4 mb-4">
+                  <img
+                    src="./ocean-job-dataset-logo.svg"
+                    alt=""
+                    className="home-feature-icon h-16 w-16 flex-shrink-0 rounded-full bg-white object-contain p-2 shadow-lg shadow-emerald-900/30"
+                  />
                   <div>
-                    <h3 className="text-xl font-bold">新型海洋数据基础设施</h3>
-                    <p className="text-base text-muted-foreground mt-2 leading-relaxed">
-                      依托中国移动5G/云计算能力，提供高效、安全、可靠的海洋数据服务，支撑海洋数据的存储、处理和应用。
+                    <h3 className="home-feature-title text-xl font-bold">全球海洋岗位高质量数据集中心</h3>
+                    <p className="home-feature-text text-base text-muted-foreground mt-2 leading-relaxed">
+                      海洋岗位高质量数据池<br />
+开放共享全球研究支撑<br />
+多源高质量标准集成库
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            <div className="home-stats-grid mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
               {heroStats.map((stat, index) => (
                 <div
                   key={stat.label}
-                  className={`rounded-lg border border-blue-500/20 bg-card/55 px-4 py-3 text-center backdrop-blur-sm card-lift animate-fade-in-up animation-delay-${(index + 3) * 100}`}
+                  className={`home-stat-card rounded-lg border border-blue-500/20 bg-card/55 px-4 py-3 text-center backdrop-blur-sm card-lift animate-fade-in-up animation-delay-${(index + 3) * 100}`}
                 >
-                  <div className="mx-auto mb-2 flex h-11 w-11  items-center justify-center rounded-xl bg-blue-600/70 shadow-lg shadow-blue-900/30">
-                    <stat.icon className="h-6 w-6 text-white" />
+                  <div className="home-stat-icon mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600/70 shadow-lg shadow-blue-900/30">
+                    <stat.icon className="home-stat-icon-svg h-6 w-6 text-white" />
                   </div>
-                  <div className="text-3xl font-bold leading-none text-blue-500">{stat.value}</div>
-                  <div className="mt-2 text-sm font-semibold text-muted-foreground">{stat.label}</div>
+                  <div className="home-stat-value text-3xl font-bold leading-none text-blue-500">{stat.value}</div>
+                  <div className="home-stat-label mt-2 text-sm font-semibold text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
             </div>
+          </div>
+
+          <div className="download-barrage" aria-label="实时下载动态">
+            {downloadBulletins.map((item, index) => (
+              <div
+                className="download-barrage-item"
+                style={{
+                  top: `${(index % 3) * 30}px`,
+                  animationDelay: `${index * -2.8}s`,
+                  animationDuration: `${24 + (index % 4) * 3}s`,
+                }}
+                key={item.dataset}
+              >
+                <span className="download-barrage-time">{item.time}</span>
+                <span>{item.user}</span>
+                <span>下载了</span>
+                <strong>{item.dataset}</strong>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* 下层：左中右三列服务区域 */}
         <section className="relative flex h-screen snap-start snap-always items-center overflow-hidden pt-20 pb-4">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background"></div>
+          <div className="absolute inset-0 reference-ocean-bg"></div>
 
           <div className="container mx-auto px-4 relative z-10 flex h-full min-h-0 flex-col justify-between gap-4">
             <div className="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-3 gap-5 xl:gap-6">
@@ -379,28 +468,7 @@ export default function Home() {
               </div>
 
               {/* 中列：核心架构展示 */}
-              <div className="flex flex-col items-center justify-center animate-fade-in-up animation-delay-400">
-                {/* 大脑图标 */}
-                <div className="w-36 h-36 xl:w-44 xl:h-44 rounded-full bg-gradient-to-br from-primary/40 to-accent/40 border-2 border-accent/60 flex items-center justify-center backdrop-blur-sm hover:border-accent hover:shadow-xl hover:shadow-accent/30 transition-all duration-300 mb-5 animate-float">
-                  <div className="text-center">
-                    <div className="text-5xl xl:text-6xl mb-2">🧠</div>
-                    <p className="text-sm font-bold text-accent">数据大脑</p>
-                  </div>
-                </div>
-
-                {/* 架构说明 */}
-                <div className="text-center">
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    <span className="font-semibold text-foreground">通过智能数据大脑</span>
-                    <br />
-                    连接海洋数据服务平台
-                    <br />
-                    与海洋数据资源池
-                    <br />
-                    <span className="text-xs mt-2 block">为用户提供完整的数据解决方案</span>
-                  </p>
-                </div>
-              </div>
+              <div className="hidden lg:block"></div>
 
               {/* 右列：海洋数据资源池 */}
               <div className={`flex min-h-0 flex-col p-5 xl:p-6 rounded-xl bg-gradient-to-br ${serviceModules[1].color} border-2 ${serviceModules[1].borderColor} backdrop-blur-sm card-lift animate-fade-in-right animation-delay-500 ${activePage === 1 ? "page-card-enter-right page-card-reset-delay" : ""}`}>
@@ -463,6 +531,57 @@ export default function Home() {
             <footer className="shrink-0 pt-1 text-center text-xs text-muted-foreground">
               <p>&copy; 2024 观海数据大脑. 保留所有权利。</p>
             </footer>
+          </div>
+        </section>
+
+        <section className="relative flex h-screen snap-start snap-always items-center overflow-hidden pt-20 pb-6">
+          <div className="absolute inset-0 reference-ocean-bg"></div>
+
+          <div className="container mx-auto px-4 relative z-10 flex h-full min-h-0 flex-col gap-4">
+            <div className={`text-center animate-fade-in-up ${activePage === 2 ? "page-card-reset-delay" : ""}`}>
+              <h2 className="text-3xl font-bold text-white">增值服务区</h2>
+            </div>
+
+            <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 md:grid-cols-2">
+              {valueAddedServices.map((service, index) => (
+                <div
+                  key={service.title}
+                  className={`value-service-cell grid min-h-0 grid-rows-[auto_auto_minmax(0,1fr)] rounded-xl border bg-gradient-to-br ${service.accentClass} p-4 backdrop-blur-sm card-lift animate-fade-in-up ${
+                    activePage === 2 ? "page-card-enter-up page-card-reset-delay" : ""
+                  }`}
+                  style={{ animationDelay: activePage === 2 ? `${index * 90}ms` : undefined }}
+                >
+                  <div className="flex items-center gap-3">
+                    <service.icon className="h-6 w-6 shrink-0 text-accent" />
+                    <h3 className="text-xl font-bold leading-tight text-white">{service.title}</h3>
+                  </div>
+
+                  <div className="mt-3 space-y-1 text-base leading-relaxed text-muted-foreground">
+                    {service.links.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        className="block w-fit rounded-sm transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 min-h-0 overflow-hidden rounded-lg border border-border/70 bg-black/20">
+                    {service.image ? (
+                      <img src={service.image} alt="" className="h-full w-full object-cover" />
+                    ) : (
+                      <div className="flex h-full min-h-[150px] items-center justify-center">
+                        <div className="flex h-20 w-20 items-center justify-center rounded-xl border border-accent/35 bg-accent/10 text-accent">
+                          <service.icon className="h-10 w-10" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </main>
