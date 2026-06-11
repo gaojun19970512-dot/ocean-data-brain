@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -21,10 +21,55 @@ import {
  * 设计理念：清晰的视觉层级，突出核心价值
  */
 
+const HOME_PAGE_COUNT = 2;
+const HOME_ACTIVE_PAGE_STATE_KEY = "oceanDataBrainHomeActivePage";
+const HOME_ACTIVE_PAGE_STORAGE_KEY = "ocean-data-brain:home-active-page";
+
+function clampHomePage(pageIndex: number) {
+  return Math.max(0, Math.min(pageIndex, HOME_PAGE_COUNT - 1));
+}
+
+function getStoredHomePage() {
+  if (typeof window === "undefined") return 0;
+
+  const state = window.history.state as Record<string, unknown> | null;
+  const pageIndex = state?.[HOME_ACTIVE_PAGE_STATE_KEY];
+
+  if (typeof pageIndex === "number") return clampHomePage(pageIndex);
+
+  const storedPage = Number(
+    window.sessionStorage.getItem(HOME_ACTIVE_PAGE_STORAGE_KEY),
+  );
+
+  return Number.isFinite(storedPage) ? clampHomePage(storedPage) : 0;
+}
+
+function storeHomePage(pageIndex: number) {
+  if (typeof window === "undefined") return;
+
+  const currentState =
+    typeof window.history.state === "object" && window.history.state !== null
+      ? window.history.state
+      : {};
+
+  window.history.replaceState(
+    {
+      ...currentState,
+      [HOME_ACTIVE_PAGE_STATE_KEY]: clampHomePage(pageIndex),
+    },
+    "",
+  );
+
+  window.sessionStorage.setItem(
+    HOME_ACTIVE_PAGE_STORAGE_KEY,
+    String(clampHomePage(pageIndex)),
+  );
+}
+
 export default function Home() {
   const scrollerRef = useRef<HTMLElement | null>(null);
   const isPagingRef = useRef(false);
-  const [activePage, setActivePage] = useState(0);
+  const [activePage, setActivePage] = useState(getStoredHomePage);
 
   const serviceModules = [
     {
@@ -39,21 +84,21 @@ export default function Home() {
           icon: Zap,
           name: "海洋数据服务接口",
           desc: "调用支持海洋环境、船舶动态",
-          link: "/service/api-hub",
+          link: "#/service/api-hub",
         },
         {
           id: "download",
           icon: Download,
           name: "国际海洋公共数据下载",
           desc: "CMEMS、NOAA等数据源",
-          link: "/service/download",
+          link: "#/service/download",
         },
         {
           id: "datasets",
           icon: Database,
           name: "海洋岗位高质量数据集",
           desc: "产品供给与质量保证",
-          link: "/service/datasets",
+          link: "#/service/datasets",
         },
       ],
     },
@@ -69,21 +114,21 @@ export default function Home() {
           icon: BarChart3,
           name: "海洋岗位高质量数据集中心",
           desc: "行业场景数据聚合",
-          link: "/pool/scenario",
+          link: "#/pool/scenario",
         },
         {
           id: "public-data",
           icon: Globe,
           name: "国内外公开海洋数据汇聚",
           desc: "全球数据接入与融合",
-          link: "/pool/public-data",
+          link: "#/pool/public-data",
         },
         {
           id: "channel",
           icon: Network,
           name: "海洋可信数据空间渠道汇聚",
           desc: "多渠道数据融合支撑",
-          link: "/pool/channel",
+          link: "#/pool/channel",
         },
       ],
     },
@@ -116,7 +161,7 @@ export default function Home() {
     const scroller = scrollerRef.current;
     if (!scroller) return;
 
-    const nextPage = Math.max(0, Math.min(pageIndex, 1));
+    const nextPage = clampHomePage(pageIndex);
     isPagingRef.current = true;
     setActivePage(nextPage);
     scroller.scrollTo({
@@ -128,6 +173,22 @@ export default function Home() {
       isPagingRef.current = false;
     }, 760);
   }, []);
+
+  useLayoutEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+
+    const restoredPage = getStoredHomePage();
+    setActivePage(restoredPage);
+    scroller.scrollTo({
+      top: restoredPage * scroller.clientHeight,
+      behavior: "instant",
+    });
+  }, []);
+
+  useEffect(() => {
+    storeHomePage(activePage);
+  }, [activePage]);
 
   const handleWheel = useCallback(
     (event: React.WheelEvent<HTMLElement>) => {
@@ -145,7 +206,7 @@ export default function Home() {
 
     const handleScroll = () => {
       const nextPage = Math.round(scroller.scrollTop / scroller.clientHeight);
-      setActivePage(Math.max(0, Math.min(nextPage, 1)));
+      setActivePage(clampHomePage(nextPage));
     };
 
     scroller.addEventListener("scroll", handleScroll, { passive: true });
@@ -169,15 +230,15 @@ export default function Home() {
 
           {/* 中间导航项 - 增大字体和间距 */}
           <div className="hidden lg:flex h-full items-center">
-            <a href="/" className="flex h-full items-center bg-[#1f7eea] px-6 text-lg font-semibold text-white transition-colors hover:bg-[#2b88f0]">首页</a>
-            <a href="/service/api-hub" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">API Hub</a>
-            <a href="/pool/public-data" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">全球公共数据源</a>
-            <a href="/service/datasets" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">高质量数据集</a>
-            <a href="/pool/channel" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">海洋可信数据空间</a>
+            <a href="#/" className="flex h-full items-center bg-[#1f7eea] px-6 text-lg font-semibold text-white transition-colors hover:bg-[#2b88f0]">首页</a>
+            <a href="#/service/api-hub" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">API Hub</a>
+            <a href="#/pool/public-data" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">全球公共数据源</a>
+            <a href="#/service/datasets" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">高质量数据集</a>
+            <a href="#/pool/channel" className="flex h-full items-center px-6 text-lg font-semibold text-white transition-colors hover:bg-white/10">海洋可信数据空间</a>
           </div>
 
           {/* 右侧按钮 */}
-          <div className="flex items-center gap-3">
+          {/* <div className="flex items-center gap-3">
             <Button size="sm" variant="ghost" className="hidden md:flex gap-2 text-white hover:bg-white/10 hover:text-white">
               <User className="w-4 h-4" />
               <span>个人中心</span>
@@ -189,7 +250,7 @@ export default function Home() {
             <Button size="sm" className="bg-[#1f7eea] text-white hover:bg-[#2b88f0]">
               注册
             </Button>
-          </div>
+          </div> */}
         </div>
       </nav>
 
@@ -269,7 +330,7 @@ export default function Home() {
                   key={stat.label}
                   className={`rounded-lg border border-blue-500/20 bg-card/55 px-4 py-3 text-center backdrop-blur-sm card-lift animate-fade-in-up animation-delay-${(index + 3) * 100}`}
                 >
-                  <div className="mx-auto mb-2 flex h-11 w-11 -rotate-12 items-center justify-center rounded-xl bg-blue-600/70 shadow-lg shadow-blue-900/30">
+                  <div className="mx-auto mb-2 flex h-11 w-11  items-center justify-center rounded-xl bg-blue-600/70 shadow-lg shadow-blue-900/30">
                     <stat.icon className="h-6 w-6 text-white" />
                   </div>
                   <div className="text-3xl font-bold leading-none text-blue-500">{stat.value}</div>

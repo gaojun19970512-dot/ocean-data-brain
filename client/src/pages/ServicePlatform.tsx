@@ -238,8 +238,8 @@ export default function ServicePlatform() {
             <span className="font-bold text-lg">观海数据大脑</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <a href="/" className="text-sm hover:text-accent transition-colors">首页</a>
-            <a href="/ocean-data-service" className="text-sm hover:text-accent transition-colors">服务平台</a>
+            <a href="#/" className="text-sm hover:text-accent transition-colors">首页</a>
+            <a href="#/ocean-data-service" className="text-sm hover:text-accent transition-colors">服务平台</a>
             <a href="#" className="text-sm text-accent font-semibold">API Hub</a>
             <Button size="sm" className="bg-primary hover:bg-primary/90">
               获取API密钥
@@ -253,9 +253,9 @@ export default function ServicePlatform() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
-              <a href="/" className="text-sm text-muted-foreground hover:text-accent transition-colors">首页</a>
+              <a href="#/" className="text-sm text-muted-foreground hover:text-accent transition-colors">首页</a>
               <span className="text-muted-foreground">/</span>
-              <a href="/ocean-data-service" className="text-sm text-muted-foreground hover:text-accent transition-colors">服务平台</a>
+              <a href="#/ocean-data-service" className="text-sm text-muted-foreground hover:text-accent transition-colors">服务平台</a>
               <span className="text-muted-foreground">/</span>
               <span className="text-sm text-accent">海洋 API Hub</span>
             </div>

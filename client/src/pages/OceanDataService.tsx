@@ -20,7 +20,7 @@ export default function OceanDataService() {
         "高性能响应",
         "完整文档支持",
       ],
-      link: "/ocean-data-service/api-hub",
+      link: "#/ocean-data-service/api-hub",
       color: "from-blue-500/20 to-cyan-500/20",
     },
     {
@@ -34,7 +34,7 @@ export default function OceanDataService() {
         "批量下载",
         "断点续传",
       ],
-      link: "/ocean-data-service/download",
+      link: "#/ocean-data-service/download",
       color: "from-green-500/20 to-emerald-500/20",
     },
     {
@@ -48,7 +48,7 @@ export default function OceanDataService() {
         "实时更新",
         "完整元数据",
       ],
-      link: "/ocean-data-service/datasets",
+      link: "#/ocean-data-service/datasets",
       color: "from-purple-500/20 to-pink-500/20",
     },
   ];
@@ -65,7 +65,7 @@ export default function OceanDataService() {
             <span className="font-bold text-lg">观海数据大脑</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <a href="/" className="text-sm hover:text-accent transition-colors">首页</a>
+            <a href="#/" className="text-sm hover:text-accent transition-colors">首页</a>
             <a href="#" className="text-sm text-accent font-semibold">服务平台</a>
             <Button size="sm" className="bg-primary hover:bg-primary/90">
               获取API密钥
@@ -79,7 +79,7 @@ export default function OceanDataService() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
-              <a href="/" className="text-sm text-muted-foreground hover:text-accent transition-colors">首页</a>
+              <a href="#/" className="text-sm text-muted-foreground hover:text-accent transition-colors">首页</a>
               <span className="text-muted-foreground">/</span>
               <span className="text-sm text-accent">海洋数据服务平台</span>
             </div>
